@@ -1,0 +1,37 @@
+---
+title: "MA615_Assignment2"
+author: "Sky Liu"
+date: "9/23/2018"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages('ggplot',repos = "http://cran.us.r-project.org")
+install.packages('tidyverse',repos = "http://cran.us.r-project.org")
+library(ggplot2)
+library(tidyverse)
+```
+
+## Load data LakeHuron
+```{r}
+LH <- data.frame(year = 1875:1972, level = LakeHuron)
+```
+
+## Enbed Shiny Inputs and Outputs
+
+```{r eruptions, echo=FALSE}
+#option for adding a smoother line
+inputPanel(
+  checkboxInput("smooth", label = "Add smoother?", value = FALSE)
+)
+renderPlot(
+    #if smoother line is selected
+    if(input$smooth){
+      ggplot(data = LH) + geom_point(mapping = aes(x = year, y = level)) + geom_line(mapping = aes(x = year, y = level)) + geom_smooth(mapping = aes(x = year, y = level)) 
+    }else{
+      ggplot(data = LH) + geom_point(mapping = aes(x = year, y = level)) + geom_line(mapping = aes(x = year, y = level))
+    }
+)
+```

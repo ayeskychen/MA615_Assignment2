@@ -1,5 +1,5 @@
 ---
-title: "MA615_Assignment2"
+title: "MA615_Assignment2_Shiny"
 author: "Sky Liu"
 date: "9/23/2018"
 output: html_document
